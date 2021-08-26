@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Espaguete ao frutos do mar",
+    "description": "Espaguete com camarão, mexilhões, lula e polvo ao molho do chef.",
+    "price": 150
+  },
+  {
+    "name": "Camarão na champagne com arroz de maçã",
+    "description": "Camarão na champagne com arroz de maçã",
+    "price": 150
+  },
+  {
+    "name": "Paella",
+    "description": "Saborosa e tradicional paella que leva camarão, mexilhões, lula e polvo.",
+    "price": 150
+  },
+  {
+    "name": "Stroganov de frutos do mar",
+    "description": "Versão de strogonoff do Marettimo com frutos do mar flambados no conhaque, a moda do chef. Acompanha arroz branco e batata em chips.",
+    "price": 150
+  },
+  {
+    "name": "Lula grelhada com arroz negro",
+    "description": "Lula grelhada e salteada no alho e ervas acompanhado com o delicioso arroz negro ao vinho branco e parmesão e purê de beterraba do chef.",
+    "price": 150
+  },
+  {
+    "name": "Lagosta ao thermidor",
+    "description": "Lagosta feita com creme de leite, cenoura, cebola, conhaque e queijo acompanhado de arroz branco.",
+    "price": 150
+  },
+  {
+    "name": "Filé mignon ao molho de ervas",
+    "description": "Filé mignon ao molho de mostardas acompanhado de arroz e batata sauté.",
+    "price": 150
+  },
+  {
+    "name": "Picanha grelhada com batata recheada",
+    "description": "Deliciosas fatias suculentas de picanha argentina premium com gordura, acompanhadas de tomates grelhados e de batatas recheadas.",
+    "price": 150
+  },
+  {
+    "name": "Paleta de cordeiro",
+    "description": "Paleta de cordeiro ao molho do chef acompanhado de arroz e feijão branco.",
+    "price": 150
+  },
+  {
+    "name": "Picadinho à Marettimo",
+    "description": "Acompanha banana à milanesa, ovos fritos, farofa de biscoito e feijão batido.",
+    "price": 150
+  },
+  {
+    "name": "Capeletti de búfala e alcachofra",
+    "description": "Servido ao molho 4 queijos.",
+    "price": 150
+  },
+  {
+    "name": "Agnolotti de búfala e manjericão",
+    "description": "Servido ao molho de tomate seco e espinafre.",
+    "price": 150
+  },
+  {
+    "name": "Nhoque de mandioquinha",
+    "description": "Servido ao molho rosé.",
+    "price": 150
+  },
+  {
+    "name": "Filé de peixe fresco a belle Meuniere",
+    "description": "Filé de peixe fresco do dia, grelhado ao molho de champignon, camarão e alcaparras. É acompanhado de verduras na manteiga e arroz.",
+    "price": 150
+  },
+  {
+    "name": "Badejo grelhado ao molho de alcaparras",
+    "description": "Filé de abadejo grelhado com molho de alcaparras e arroz de brócolis.",
+    "price": 150
+  },
+  {
+    "name": "Badejo à brasileira",
+    "description": "Filé de badejo ao molho de tomate e camarão acompanhado de arroz branco.",
+    "price": 150
+  }
+]
