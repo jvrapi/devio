@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
+import { OrdersContextProvider } from './contexts/OrdersContext'
 // import { Container } from './styles';
 import { Home } from './pages/Home'
 import { GlobalStyles } from './styles/global'
@@ -11,9 +12,11 @@ const App: React.FC = () => {
     <ThemeProvider theme={light}>
       <GlobalStyles />
       <BrowserRouter>
-        <Switch>
-          <Route path="/" exact component={Home} />
-        </Switch>
+        <OrdersContextProvider>
+          <Switch>
+            <Route path="/" exact component={Home} />
+          </Switch>
+        </OrdersContextProvider>
       </BrowserRouter>
     </ThemeProvider>
   )

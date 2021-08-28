@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios'
 import { api } from './Api'
 
-export type IProduct = {
+export type Product = {
   id: number
   name: string
   description: string
@@ -11,7 +11,7 @@ export type IProduct = {
 const baseUrl = '/products'
 
 const productsService = {
-  async getProducts(): Promise<AxiosResponse<IProduct[]>> {
+  async getProducts(): Promise<AxiosResponse<Product[]>> {
     const response = api.get(`${baseUrl}`)
     return response
   }
