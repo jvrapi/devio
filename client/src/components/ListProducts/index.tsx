@@ -1,5 +1,5 @@
 import React from 'react'
-import { Product } from '../services/Product'
+import { Product } from '../../services/Product'
 import { IoIosRestaurant } from 'react-icons/io'
 import {
   Container,
@@ -13,8 +13,8 @@ import {
   ProductPrice,
   AddProductToOrderButton
 } from './styles'
-import { useOrders } from '../hooks/useOrders'
-import { Order, OrderProducts } from '../contexts/OrdersContext'
+import { useOrders } from '../../hooks/useOrders'
+import { Order, OrderProducts } from '../../contexts/OrdersContext'
 
 type Props = {
   data: Product[]

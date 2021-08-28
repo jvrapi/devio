@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import { OrdersContextProvider } from './contexts/OrdersContext'
-// import { Container } from './styles';
+import { Checkout } from './pages/Checkout'
 import { Home } from './pages/Home'
 import { GlobalStyles } from './styles/global'
 import light from './styles/themes/light'
@@ -15,6 +15,7 @@ const App: React.FC = () => {
         <OrdersContextProvider>
           <Switch>
             <Route path="/" exact component={Home} />
+            <Route path="/checkout" component={Checkout} />
           </Switch>
         </OrdersContextProvider>
       </BrowserRouter>

@@ -1,24 +1,26 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { GoSearch } from 'react-icons/go'
 import { RiFileEditLine } from 'react-icons/ri'
-import {
-  Container,
-  Header,
-  Main,
-  RightContainer,
-  SearchBox,
-  SearchInput,
-  Title,
-  TotalItemsContainer,
-  TotalItems,
-  TotalOrder
-} from './styles'
 
 import { ListProducts } from '../../components/ListProducts'
 import { Product, productsService } from '../../services/Product'
 import { useOrders } from '../../hooks/useOrders'
 
+import {
+  Container,
+  Main,
+  RightContainer,
+  SearchBox,
+  SearchInput,
+  TotalItemsContainer,
+  TotalItems,
+  TotalOrder
+} from './styles'
+import { Header } from '../../components/Header'
+
 const Home: React.FC = () => {
+  const history = useHistory()
   const { order } = useOrders()
   const [amountProducts, setAmountProducts] = useState(0)
   const [products, setProducts] = useState<Product[]>([])
@@ -44,6 +46,10 @@ const Home: React.FC = () => {
     }
   }
 
+  const navigateToCheckoutPage = () => {
+    history.push('/checkout')
+  }
+
   useEffect(() => {
     if (initialRender.current) {
       initialRender.current = false
@@ -61,9 +67,8 @@ const Home: React.FC = () => {
   return (
     <Container>
       <Header>
-        <Title>Devs Rest</Title>
         <RightContainer>
-          <TotalOrder>
+          <TotalOrder onClick={navigateToCheckoutPage}>
             <RiFileEditLine size={30} />
             <TotalItemsContainer>
               <TotalItems>{amountProducts}</TotalItems>
