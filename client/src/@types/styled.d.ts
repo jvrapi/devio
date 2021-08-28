@@ -1,18 +1,9 @@
+/* eslint-disable @typescript-eslint/no-empty-interface */
 import 'styled-components'
+import theme from '../styles/themes/light'
+
+type Theme = typeof theme
 
 declare module 'styled-components' {
-  export interface DefaultTheme {
-    name: string
-
-    colors: {
-      primary: string
-      secondary: string
-
-      background: string
-      text: string
-      disabled: string
-      ballSwitch: string
-      headerBorder: string
-    }
-  }
+  export interface DefaultTheme extends Theme { }
 }

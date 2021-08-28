@@ -3,13 +3,8 @@ import { ListAllProductsService } from '../services/ListAllProductsService'
 
 class ListAllProductsController {
   async handle(request: Request, response: Response) {
-    const { limit, name, id } = request.query
     const listAllProductsService = new ListAllProductsService()
-    const products = await listAllProductsService.execute(
-      name ? name.toString() : '',
-      +id,
-      +limit
-    )
+    const products = await listAllProductsService.execute()
     return response.json(products)
   }
 }
