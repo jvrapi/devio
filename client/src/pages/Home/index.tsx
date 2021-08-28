@@ -22,11 +22,26 @@ const Home: React.FC = () => {
   const { order } = useOrders()
   const [amountProducts, setAmountProducts] = useState(0)
   const [products, setProducts] = useState<Product[]>([])
+  const [searchText, setSearchText] = useState('')
   const initialRender = useRef(true)
 
   const getProducts = async () => {
     const { data } = await productsService.getProducts()
     setProducts(data)
+  }
+
+  const searchProduct = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target
+    setSearchText(value)
+    if (!value) {
+      await getProducts()
+    } else if (isNaN(parseInt(value))) {
+      const { data } = await productsService.getProductsByName(value)
+      setProducts(data)
+    } else {
+      const { data } = await productsService.getProductsById(+value)
+      setProducts(data)
+    }
   }
 
   useEffect(() => {
@@ -55,7 +70,11 @@ const Home: React.FC = () => {
             </TotalItemsContainer>
           </TotalOrder>
           <SearchBox>
-            <SearchInput placeholder="pesquisar produto" />
+            <SearchInput
+              placeholder="pesquisar produto"
+              value={searchText}
+              onChange={searchProduct}
+            />
             <GoSearch size={25} />
           </SearchBox>
         </RightContainer>
