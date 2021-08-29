@@ -1,26 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useHistory } from 'react-router-dom'
-import { GoSearch } from 'react-icons/go'
-import { RiFileEditLine } from 'react-icons/ri'
 
 import { ListProducts } from '../../components/ListProducts'
 import { Product, productsService } from '../../services/Product'
 import { useOrders } from '../../hooks/useOrders'
 
-import {
-  Container,
-  Main,
-  RightContainer,
-  SearchBox,
-  SearchInput,
-  TotalItemsContainer,
-  TotalItems,
-  TotalOrder
-} from './styles'
+import { Container, Main, Menu, Order } from './styles'
 import { Header } from '../../components/Header'
+import { ListOrder } from '../../components/ListOrder'
 
 const Home: React.FC = () => {
-  const history = useHistory()
   const { order } = useOrders()
   const [amountProducts, setAmountProducts] = useState(0)
   const [products, setProducts] = useState<Product[]>([])
@@ -46,10 +34,6 @@ const Home: React.FC = () => {
     }
   }
 
-  const navigateToCheckoutPage = () => {
-    history.push('/checkout')
-  }
-
   useEffect(() => {
     if (initialRender.current) {
       initialRender.current = false
@@ -66,26 +50,18 @@ const Home: React.FC = () => {
 
   return (
     <Container>
-      <Header>
-        <RightContainer>
-          <TotalOrder onClick={navigateToCheckoutPage}>
-            <RiFileEditLine size={30} />
-            <TotalItemsContainer>
-              <TotalItems>{amountProducts}</TotalItems>
-            </TotalItemsContainer>
-          </TotalOrder>
-          <SearchBox>
-            <SearchInput
-              placeholder="pesquisar produto"
-              value={searchText}
-              onChange={searchProduct}
-            />
-            <GoSearch size={25} />
-          </SearchBox>
-        </RightContainer>
-      </Header>
+      <Header />
       <Main>
-        <ListProducts data={products} />
+        <Menu>
+          <ListProducts
+            data={products}
+            searchText={searchText}
+            searchProduct={searchProduct}
+          />
+        </Menu>
+        <Order>
+          <ListOrder />
+        </Order>
       </Main>
     </Container>
   )

@@ -1,26 +1,31 @@
 import React from 'react'
 import { Product } from '../../services/Product'
-import { IoIosRestaurant } from 'react-icons/io'
+import { GoSearch } from 'react-icons/go'
+
 import {
   Container,
-  ProductContainer,
-  ProductBox,
-  ProductBoxHeader,
-  ProductBoxMain,
+  Title,
+  Menu,
+  SearchInput,
+  SearchBox,
+  Main,
+  Products,
   ProductName,
-  ProductBoxFooter,
-  ProductDescription,
   ProductPrice,
-  AddProductToOrderButton
+  ProductRow,
+  LeftContainer,
+  RightContainer
 } from './styles'
 import { useOrders } from '../../hooks/useOrders'
 import { Order, OrderProducts } from '../../contexts/OrdersContext'
 
 type Props = {
   data: Product[]
+  searchText: string
+  searchProduct(event: React.ChangeEvent<HTMLInputElement>): void
 }
 
-const ListProducts: React.FC<Props> = ({ data }) => {
+const ListProducts: React.FC<Props> = ({ data, searchText, searchProduct }) => {
   const { order, orders, updateOrder } = useOrders()
 
   const addProductToOrder = (product: Product) => {
@@ -50,28 +55,36 @@ const ListProducts: React.FC<Props> = ({ data }) => {
   }
   return (
     <Container>
-      {data.slice(0, 5).map(product => (
-        <ProductContainer key={product.id}>
-          <ProductBox>
-            <ProductBoxHeader>
-              <ProductName>{product.name}</ProductName>
-            </ProductBoxHeader>
+      <Title>Cardapio</Title>
+      <Menu>
+        <SearchBox>
+          <SearchInput
+            placeholder="pesquisar produto"
+            value={searchText}
+            onChange={searchProduct}
+          />
+          <GoSearch size={25} />
+        </SearchBox>
+        <Main>
+          {data.slice(0, 17).map(product => (
+            <Products
+              key={product.id}
+              onClick={() => addProductToOrder(product)}
+              title="Adicionar produto ao pedido"
+            >
+              <ProductRow>
+                <LeftContainer>
+                  <ProductName>{product.name}</ProductName>
+                </LeftContainer>
 
-            <ProductBoxMain>
-              <IoIosRestaurant size={70} />
-            </ProductBoxMain>
-
-            <ProductBoxFooter>
-              <ProductDescription>{product.description}</ProductDescription>
-            </ProductBoxFooter>
-          </ProductBox>
-          <ProductPrice>R$ {product.price}</ProductPrice>
-
-          <AddProductToOrderButton onClick={() => addProductToOrder(product)}>
-            Adicionar produto
-          </AddProductToOrderButton>
-        </ProductContainer>
-      ))}
+                <RightContainer>
+                  <ProductPrice>{product.price}</ProductPrice>
+                </RightContainer>
+              </ProductRow>
+            </Products>
+          ))}
+        </Main>
+      </Menu>
     </Container>
   )
 }
