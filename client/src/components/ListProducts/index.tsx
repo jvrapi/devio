@@ -53,6 +53,7 @@ const ListProducts: React.FC<Props> = ({ data, searchText, searchProduct }) => {
 
     updateOrder(orderState)
   }
+
   return (
     <Container>
       <Title>Cardapio</Title>

@@ -1,19 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { ListProducts } from '../../components/ListProducts'
 import { Product, productsService } from '../../services/Product'
-import { useOrders } from '../../hooks/useOrders'
 
 import { Container, Main, Menu, Order } from './styles'
 import { Header } from '../../components/Header'
 import { ListOrder } from '../../components/ListOrder'
 
 const Home: React.FC = () => {
-  const { order } = useOrders()
-  const [amountProducts, setAmountProducts] = useState(0)
   const [products, setProducts] = useState<Product[]>([])
   const [searchText, setSearchText] = useState('')
-  const initialRender = useRef(true)
 
   const getProducts = async () => {
     const { data } = await productsService.getProducts()
@@ -33,16 +29,6 @@ const Home: React.FC = () => {
       setProducts(data)
     }
   }
-
-  useEffect(() => {
-    if (initialRender.current) {
-      initialRender.current = false
-    } else {
-      let amount = 0
-      order?.products.forEach(product => (amount += product.amount))
-      setAmountProducts(amount)
-    }
-  }, [order])
 
   useEffect(() => {
     getProducts()

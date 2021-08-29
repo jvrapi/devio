@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import CurrencyInput from 'react-currency-input'
 
 export const Container = styled.div``
 
@@ -6,7 +7,7 @@ export const Title = styled.h2`
   text-align: center;
 `
 
-export const Order = styled.div`
+export const OrderDetails = styled.div`
   height: 650px;
   width: 500px;
   border: 1px solid ${props => props.theme.colors.secondary};
@@ -109,7 +110,7 @@ export const ReceivedMoney = styled.div`
   padding: 5px 10px;
 `
 
-export const ReceivedMoneyInput = styled.input`
+export const ReceivedMoneyInput = styled(CurrencyInput)`
   width: 95%;
   height: 100%;
   padding: 5px;
