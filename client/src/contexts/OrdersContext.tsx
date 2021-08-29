@@ -1,4 +1,5 @@
 import React, { ReactNode, createContext, useState } from 'react'
+import { toast } from 'react-toastify'
 
 export type OrderProducts = {
   amount: number
@@ -10,6 +11,7 @@ export type OrderProducts = {
 export type Order = {
   id: number
   ready: boolean
+  clientName: string
   products: OrderProducts[]
 }
 
@@ -34,9 +36,11 @@ export const OrdersContextProvider: React.FC<OrdersContextProviderProps> = ({
 
   const updateOrders = (newOrders: Order[]) => {
     setOrders(newOrders)
+    toast.success('Pedido finalizado e encaminhado a cozinha')
   }
 
   const updateOrder = (newOrder: Order) => {
+    console.log(newOrder)
     setOrder(newOrder)
   }
 

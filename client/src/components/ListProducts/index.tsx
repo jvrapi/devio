@@ -18,6 +18,7 @@ import {
 } from './styles'
 import { useOrders } from '../../hooks/useOrders'
 import { Order, OrderProducts } from '../../contexts/OrdersContext'
+import { formatPrice } from '../../utils/formatters'
 
 type Props = {
   data: Product[]
@@ -79,7 +80,7 @@ const ListProducts: React.FC<Props> = ({ data, searchText, searchProduct }) => {
                 </LeftContainer>
 
                 <RightContainer>
-                  <ProductPrice>{product.price}</ProductPrice>
+                  <ProductPrice>{formatPrice(product.price)}</ProductPrice>
                 </RightContainer>
               </ProductRow>
             </Products>

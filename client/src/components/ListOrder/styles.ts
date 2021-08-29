@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import CurrencyInput from 'react-currency-input'
+import CurrencyInput from 'react-currency-input-field'
 
 export const Container = styled.div``
 

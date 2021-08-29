@@ -1,9 +1,9 @@
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 import { useOrders } from '../../hooks/useOrders'
 import { TiTimesOutline } from 'react-icons/ti'
 import { IoIosPerson } from 'react-icons/io'
 import { GiReceiveMoney } from 'react-icons/gi'
-import NumberFormat from 'react-number-format'
+import { toast } from 'react-toastify'
 import {
   Container,
   Main,
@@ -25,6 +25,7 @@ import {
   ClientNameInput
 } from './styles'
 import { Order } from '../../contexts/OrdersContext'
+import { formatPrice } from '../../utils/formatters'
 
 const initialValues = {
   clientName: '',
@@ -32,7 +33,7 @@ const initialValues = {
 }
 
 const ListOrder: React.FC = () => {
-  const { order, updateOrder } = useOrders()
+  const { order, updateOrder, updateOrders, orders } = useOrders()
   const [orderDetails, setOrderDetails] = useState(initialValues)
 
   const totalOrderSum = () => {
@@ -55,22 +56,46 @@ const ListOrder: React.FC = () => {
     setOrderDetails({ ...orderDetails, [name]: value })
   }
 
-  const currencyUpdate = (event: any, maskedvalue: any, floatvalue: any) => {
-    setOrderDetails({ ...orderDetails, receivedMoney: floatvalue })
+  const currencyUpdate = (value: string | undefined) => {
+    setOrderDetails({ ...orderDetails, receivedMoney: value as string })
   }
 
-  const handleKeyUp = useCallback((e: React.FormEvent<HTMLInputElement>) => {
-    let value = e.currentTarget.value
-    value = value.replace(/\D/g, '')
-    value = value.replace(/(\d)(\d{2})$/, '$1,$2')
-    value = value.replace(/(?=(\d{3})+(\D))\B/g, '.')
-
-    e.currentTarget.value = value
-    return e
-  }, [])
+  const calculateChange = () => {
+    const totalOrder = +totalOrderSum()
+    if (+orderDetails.receivedMoney < totalOrder) {
+      return 0
+    } else {
+      return formatPrice(+orderDetails.receivedMoney - totalOrder)
+    }
+  }
 
   const finishOrder = () => {
-    console.log(orderDetails)
+    const { clientName, receivedMoney } = orderDetails
+    const errors: string[] = []
+
+    if (!clientName) {
+      errors.push('Por favor, insira o nome do cliente')
+    }
+    if (!receivedMoney) {
+      errors.push('Por favor, insira o valor recebido')
+    }
+    if (order?.products.length === 0 || order?.products === undefined) {
+      errors.push('Por favor, insira algum produto antes de finalizar o pedido')
+    }
+
+    if (errors.length > 0) {
+      errors.forEach(error => toast.error(error))
+    } else {
+      orders.push({ ...order, clientName } as Order)
+      updateOrders(orders)
+
+      const orderState = { ...order } as Order
+      orderState.id = orders.length + 1
+      orderState.products = []
+      updateOrder(orderState)
+    }
+
+    setOrderDetails(initialValues)
   }
 
   return (
@@ -100,15 +125,7 @@ const ListOrder: React.FC = () => {
           ))}
         </Main>
         <Footer>
-          <TotalOrder>
-            Total:
-            <NumberFormat
-              value={totalOrderSum()}
-              displayType={'text'}
-              thousandSeparator={true}
-              prefix={'R$'}
-            />
-          </TotalOrder>
+          <TotalOrder>Total: {formatPrice(totalOrderSum())}</TotalOrder>
           <ClientName>
             <ClientNameInput
               value={orderDetails.clientName}
@@ -123,13 +140,14 @@ const ListOrder: React.FC = () => {
               value={orderDetails.receivedMoney}
               name="receivedMoney"
               placeholder="Insira o valor recebido"
-              onKeyUp={handleKeyUp}
-              required
-              onChangeEvent={currencyUpdate}
+              onValueChange={currencyUpdate}
+              decimalSeparator="."
+              groupSeparator=","
+              prefix="R$ "
             />
             <GiReceiveMoney size={35} />
           </ReceivedMoney>
-          <Change>Troco: R$</Change>
+          <Change>Troco: {calculateChange()}</Change>
 
           <FinishOrder onClick={finishOrder}>Finalizar pedido</FinishOrder>
         </Footer>
