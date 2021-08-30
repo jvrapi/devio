@@ -87,7 +87,7 @@ const ListOrder: React.FC = () => {
       errors.forEach(error => toast.error(error))
     } else {
       orders.push({ ...order, clientName } as Order)
-      updateOrders(orders)
+      updateOrders(orders, 'Pedido finalizado e encaminhado a cozinha!')
 
       const orderState = { ...order } as Order
       orderState.id = orders.length + 1
@@ -119,6 +119,7 @@ const ListOrder: React.FC = () => {
                   onClick={() => removeProductFromOrder(product.id)}
                   color="#FF605c"
                   title="Remover produto do pedido"
+                  style={{ cursor: 'pointer' }}
                 />
               </RightContainer>
             </ProductRow>

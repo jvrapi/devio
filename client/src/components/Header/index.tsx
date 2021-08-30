@@ -1,12 +1,11 @@
 import React from 'react'
-
-import { RiFileEditFill } from 'react-icons/ri'
-import { GrRestaurant } from 'react-icons/gr'
-import { FaUserTie } from 'react-icons/fa'
-
-import { Container, Title, Menu, MenuItem, MenuIcon } from './styles'
 import { useHistory, useLocation } from 'react-router-dom'
 import { useTheme } from 'styled-components'
+import { RiFileEditFill } from 'react-icons/ri'
+import { FaUserTie } from 'react-icons/fa'
+import { IoMdRestaurant } from 'react-icons/io'
+
+import { Container, Title, Menu, MenuItem, MenuIcon } from './styles'
 
 const menuData = [
   {
@@ -17,7 +16,7 @@ const menuData = [
   },
   {
     path: '/kitchen',
-    icon: GrRestaurant,
+    icon: IoMdRestaurant,
     title: 'Listar de pedidos',
     name: 'Cozinha'
   },

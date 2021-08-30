@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components'
 import { ToastContainer } from 'react-toastify'
 import { OrdersContextProvider } from './contexts/OrdersContext'
 import { Kitchen } from './pages/Kitchen'
+import { Waiter } from './pages/Waiter'
 import { Home } from './pages/Home'
 import { GlobalStyles } from './styles/global'
 import light from './styles/themes/light'
@@ -18,6 +19,7 @@ const App: React.FC = () => {
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/kitchen" component={Kitchen} />
+            <Route path="/waiter" component={Waiter} />
           </Switch>
         </OrdersContextProvider>
       </BrowserRouter>

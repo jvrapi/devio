@@ -22,7 +22,7 @@ export const OrderDetails = styled.div`
 export const Main = styled.main`
   width: 100%;
   height: 60%;
-  color: #fff;
+  color: ${props => props.theme.colors.cardTextColor};
   overflow: auto;
 `
 
@@ -30,7 +30,7 @@ export const ProductRow = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
+
   :nth-child(n + 2) {
     margin-top: 20px;
   }
@@ -129,10 +129,4 @@ export const FinishOrder = styled.button`
   width: 200px;
   height: 40px;
   border-radius: 20px;
-  border: 2px solid ${props => props.theme.colors.secondary};
-  cursor: pointer;
-  transition: 0.2s;
-  :hover {
-    background: #ccc;
-  }
 `

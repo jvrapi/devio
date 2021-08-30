@@ -40,7 +40,7 @@ export const SearchInput = styled.input`
 export const Main = styled.main`
   width: 100%;
   height: 100%;
-  color: #fff;
+  color: ${props => props.theme.colors.cardTextColor};
   overflow: auto;
 `
 

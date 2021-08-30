@@ -16,4 +16,12 @@ export const GlobalStyles = createGlobalStyle`
   input:focus {
     outline: none !important;
   }
+  button{
+    border: 2px solid ${props => props.theme.colors.secondary};
+    cursor: pointer;
+    transition: 0.2s;
+    :hover {
+      background: #ccc;
+    }
+  }
 `

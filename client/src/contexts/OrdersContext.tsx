@@ -18,7 +18,7 @@ export type Order = {
 export type OrdersContextProps = {
   orders: Order[]
   order: Order | undefined
-  updateOrders(orders: Order[]): void
+  updateOrders(orders: Order[], message?: string): void
   updateOrder(order: Order): void
 }
 
@@ -34,13 +34,12 @@ export const OrdersContextProvider: React.FC<OrdersContextProviderProps> = ({
   const [orders, setOrders] = useState<Order[]>([])
   const [order, setOrder] = useState<Order>()
 
-  const updateOrders = (newOrders: Order[]) => {
+  const updateOrders = (newOrders: Order[], message?: string) => {
     setOrders(newOrders)
-    toast.success('Pedido finalizado e encaminhado a cozinha')
+    !!message && toast.success(message)
   }
 
   const updateOrder = (newOrder: Order) => {
-    console.log(newOrder)
     setOrder(newOrder)
   }
 

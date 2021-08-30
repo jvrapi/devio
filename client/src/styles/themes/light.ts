@@ -8,6 +8,7 @@ export default {
     background: '#f8f8f8',
     title: '#FFFFFF',
     footer: '#F4F4F4',
-    activeIcon: '#358087'
+    activeIcon: '#358087',
+    cardTextColor: '#ffffff'
   }
 }
