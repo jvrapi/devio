@@ -11,7 +11,7 @@ export const Main = styled.main`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 50px;
 `
 export const Menu = styled.div``
 export const Order = styled.div``

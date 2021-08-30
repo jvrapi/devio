@@ -7,6 +7,7 @@ export default {
     text: '#29292e',
     background: '#f8f8f8',
     title: '#FFFFFF',
-    footer: '#F4F4F4'
+    footer: '#F4F4F4',
+    activeIcon: '#358087'
   }
 }
