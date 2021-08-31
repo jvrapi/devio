@@ -11,6 +11,7 @@ export type OrderProducts = {
 export type Order = {
   id: number
   ready: boolean
+  withdrawn: boolean
   clientName: string
   products: OrderProducts[]
 }

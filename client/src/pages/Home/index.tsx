@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { ListProducts } from '../../components/ListProducts'
 import { Product, productsService } from '../../services/Product'
 
-import { Container, Main, Menu, Order } from './styles'
+import { Container, Main, Title } from './styles'
 import { Header } from '../../components/Header'
 import { ListOrder } from '../../components/ListOrder'
 
@@ -37,17 +37,15 @@ const Home: React.FC = () => {
   return (
     <Container>
       <Header />
+      <Title>Novo Pedido</Title>
       <Main>
-        <Menu>
-          <ListProducts
-            data={products}
-            searchText={searchText}
-            searchProduct={searchProduct}
-          />
-        </Menu>
-        <Order>
-          <ListOrder />
-        </Order>
+        <ListProducts
+          data={products}
+          searchText={searchText}
+          searchProduct={searchProduct}
+        />
+
+        <ListOrder />
       </Main>
     </Container>
   )

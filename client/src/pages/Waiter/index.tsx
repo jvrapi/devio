@@ -1,13 +1,17 @@
 import React from 'react'
 import { Header } from '../../components/Header'
+import { ListOrders } from '../../components/ListOrders'
 
-import { Container } from './styles'
+import { Container, Main, Title } from './styles'
 
 const Waiter: React.FC = () => {
   return (
     <Container>
       <Header />
-      Waiter Page
+      <Title>Retirar pedidos</Title>
+      <Main>
+        <ListOrders listAllOrdersReady />
+      </Main>
     </Container>
   )
 }

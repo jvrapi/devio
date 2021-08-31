@@ -50,6 +50,8 @@ const ListProducts: React.FC<Props> = ({ data, searchText, searchProduct }) => {
 
       orderState.products = orderState.products ? [...orderState.products] : []
       orderState.products.push(insertProduct)
+      orderState.ready = false
+      orderState.withdrawn = false
     }
 
     updateOrder(orderState)
