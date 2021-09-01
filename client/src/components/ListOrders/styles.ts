@@ -131,7 +131,11 @@ export const OrderNoteBox = styled.div`
   flex-direction: column;
 `
 export const OrderNoteText = styled.p`
-  font-size: 17px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 700;
 `
-export const OrderNoteTitle = styled.h2``
+export const OrderNoteTitle = styled.a`
+  cursor: pointer;
+  font-size: 25px;
+  font-weight: 700;
+`

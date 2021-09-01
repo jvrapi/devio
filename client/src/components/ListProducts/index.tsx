@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { GoSearch } from 'react-icons/go'
 
 import {
@@ -53,6 +53,26 @@ const ListProducts: React.FC<Props> = ({ data, searchText, searchProduct }) => {
 
     updateOrder(orderState)
   }
+
+  useEffect(() => {
+    const createNewOrder = () => {
+      const order: Order = {
+        id: Math.floor(Math.random() * 1000 + 100),
+        ready: false,
+        withdrawn: false,
+        payment: '',
+        clientName: '',
+        note: '',
+        products: []
+      }
+
+      updateOrder(order)
+    }
+    createNewOrder()
+    return () => {
+      createNewOrder()
+    }
+  }, [])
 
   return (
     <Container>

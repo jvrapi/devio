@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Order } from '../../contexts/OrdersContext'
 import { useOrders } from '../../hooks/useOrders'
 import { IoCloudOffline } from 'react-icons/io5'
-
+import ReactTooltip from 'react-tooltip'
 import {
   ClientName,
   Container,
@@ -31,33 +31,16 @@ type Props = {
 }
 
 const ListOrders: React.FC<Props> = ({ listAllOrdersReady }) => {
-  const { orders, updateOrders } = useOrders()
+  const { orders, orderReady, withdrawOrder } = useOrders()
   const [data, setData] = useState<Order[]>([])
 
   const onClickHandle = (id: number) => {
-    if (!listAllOrdersReady) {
-      const orderUpdated = orders.map(order => {
-        if (order.id === id) {
-          order.ready = true
-        }
-        return order
-      })
-      updateOrders(orderUpdated, 'Baixa de pedido realizada com sucesso')
-    } else {
-      const orderUpdated = orders.map(order => {
-        if (order.id === id) {
-          order.withdrawn = true
-        }
-        return order
-      })
-      updateOrders(orderUpdated, 'Pedido retirado com sucesso')
-    }
+    listAllOrdersReady ? withdrawOrder(id) : orderReady(id)
   }
 
   useEffect(() => {
     if (listAllOrdersReady) {
       const newOrders = orders.filter(({ ready }) => ready)
-      console.log(orders)
       setData(newOrders)
     } else {
       const newOrders = orders.filter(({ ready }) => !ready)
@@ -93,13 +76,22 @@ const ListOrders: React.FC<Props> = ({ listAllOrdersReady }) => {
                     </OrderProducts>
                   ))}
                 </OrdersBoxMain>
-                <OrdersBoxFooter>
-                  {note && (
-                    <OrderNoteBox>
-                      <OrderNoteTitle>Observações</OrderNoteTitle>
+                {note && (
+                  <OrderNoteBox>
+                    <OrderNoteTitle data-tip data-for={id.toString()}>
+                      Observações
+                    </OrderNoteTitle>
+                    <ReactTooltip
+                      id={id.toString()}
+                      place="top"
+                      type="light"
+                      effect="float"
+                    >
                       <OrderNoteText>{note}</OrderNoteText>
-                    </OrderNoteBox>
-                  )}
+                    </ReactTooltip>
+                  </OrderNoteBox>
+                )}
+                <OrdersBoxFooter>
                   <OrderButton onClick={() => onClickHandle(id)}>
                     {ready ? 'Retirar pedido' : 'Dar baixa no pedido'}
                   </OrderButton>

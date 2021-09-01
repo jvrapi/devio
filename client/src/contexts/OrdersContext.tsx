@@ -1,10 +1,4 @@
-import React, {
-  ReactNode,
-  createContext,
-  useState,
-  useCallback,
-  useEffect
-} from 'react'
+import React, { ReactNode, createContext, useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { socket } from '../services/Socket'
 export type OrderProducts = {
@@ -20,14 +14,17 @@ export type Order = {
   withdrawn: boolean
   clientName: string
   note: string
+  payment: string
   products: OrderProducts[]
 }
 
 export type OrdersContextProps = {
   orders: Order[]
   order: Order | undefined
-  updateOrders(orders: Order[], message?: string): void
+  finishOrder(orders: Order): void
   updateOrder(order: Order): void
+  orderReady(orderId: number): void
+  withdrawOrder(orderId: number): void
 }
 
 type OrdersContextProviderProps = {
@@ -42,13 +39,42 @@ export const OrdersContextProvider: React.FC<OrdersContextProviderProps> = ({
   const [orders, setOrders] = useState<Order[]>([])
   const [order, setOrder] = useState<Order>()
 
-  const updateOrders = useCallback((newOrders: Order[], message?: string) => {
-    socket.emit('orders.update', newOrders)
+  const updateOrders = (orders: Order[]) => {
+    socket.emit('orders.update', orders)
     socket.on('orders.update', data => {
       setOrders(data)
     })
-    !!message && toast.success(message)
-  }, [])
+  }
+
+  const orderReady = (orderId: number) => {
+    const updateOrder = orders.map(order => {
+      if (order.id === orderId) {
+        order.ready = true
+      }
+      return order
+    })
+    updateOrders(updateOrder)
+    toast.success('Pedido finalizado e pronto para ser retirado')
+  }
+
+  const withdrawOrder = (orderId: number) => {
+    const updateOrder = orders.map(order => {
+      if (order.id === orderId) {
+        order.withdrawn = true
+      }
+      return order
+    })
+    updateOrders(updateOrder)
+
+    toast.success('Pedido retirado com sucesso')
+  }
+
+  const finishOrder = (newOrder: Order) => {
+    orders.push(newOrder)
+    updateOrders(orders)
+
+    toast.success('Pedido finalizado com sucesso')
+  }
 
   const updateOrder = (newOrder: Order) => {
     setOrder(newOrder)
@@ -65,7 +91,14 @@ export const OrdersContextProvider: React.FC<OrdersContextProviderProps> = ({
 
   return (
     <OrdersContext.Provider
-      value={{ orders, updateOrders, order, updateOrder }}
+      value={{
+        orders,
+        finishOrder,
+        order,
+        updateOrder,
+        orderReady,
+        withdrawOrder
+      }}
     >
       {children}
     </OrdersContext.Provider>

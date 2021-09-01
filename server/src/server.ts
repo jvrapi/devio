@@ -36,7 +36,6 @@ io.on('connection', socket => {
   })
 
   socket.on('orders.update', data => {
-    const orders = data.map(order => Object.assign(order, { id: data.length }))
-    io.emit('orders.update', orders)
+    io.emit('orders.update', data)
   })
 })
