@@ -18,25 +18,9 @@ export const Menu = styled.div`
   justify-content: flex-start;
 `
 export const SearchBox = styled.header`
-  height: 40px;
   width: 350px;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  border: 2px solid ${props => props.theme.colors.secondary};
-  border-radius: 20px;
-  padding: 5px 10px;
-  background: #ffffff;
-  margin: 10px 0;
 `
 
-export const SearchInput = styled.input`
-  height: 100%;
-  width: 300px;
-  border: none;
-  background: transparent;
-  padding: 5px;
-`
 export const Main = styled.main`
   width: 100%;
   height: 100%;

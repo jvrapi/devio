@@ -3,6 +3,7 @@ import { useOrders } from '../../hooks/useOrders'
 import { TiTimesOutline } from 'react-icons/ti'
 import { IoIosPerson } from 'react-icons/io'
 import { GiReceiveMoney } from 'react-icons/gi'
+import { GrNotes } from 'react-icons/gr'
 import { toast } from 'react-toastify'
 import {
   Container,
@@ -17,19 +18,18 @@ import {
   RightContainer,
   TotalProduct,
   Change,
-  ClientName,
   FinishOrder,
-  ReceivedMoney,
-  TotalOrder,
-  ReceivedMoneyInput,
-  ClientNameInput
+  TotalOrder
 } from './styles'
 import { Order } from '../../contexts/OrdersContext'
 import { formatPrice } from '../../utils/formatters'
+import { InputComponent } from '../Input'
+import { CurrencyInput } from '../CurrencyInput'
 
 const initialValues = {
   clientName: '',
-  receivedMoney: ''
+  receivedMoney: '',
+  note: ''
 }
 
 const ListOrder: React.FC = () => {
@@ -70,7 +70,7 @@ const ListOrder: React.FC = () => {
   }
 
   const finishOrder = () => {
-    const { clientName, receivedMoney } = orderDetails
+    const { clientName, receivedMoney, note } = orderDetails
     const errors: string[] = []
 
     if (!clientName) {
@@ -79,6 +79,9 @@ const ListOrder: React.FC = () => {
     if (!receivedMoney) {
       errors.push('Por favor, insira o valor recebido')
     }
+    if (+receivedMoney < totalOrderSum()) {
+      errors.push('Valor inserido é menor que o total do pedido')
+    }
     if (order?.products.length === 0 || order?.products === undefined) {
       errors.push('Por favor, insira algum produto antes de finalizar o pedido')
     }
@@ -86,16 +89,14 @@ const ListOrder: React.FC = () => {
     if (errors.length > 0) {
       errors.forEach(error => toast.error(error))
     } else {
-      orders.push({ ...order, clientName } as Order)
+      orders.push({ ...order, clientName, note } as Order)
       updateOrders(orders, 'Pedido finalizado e encaminhado a cozinha!')
 
       const orderState = { ...order } as Order
-      orderState.id = orders.length + 1
       orderState.products = []
       updateOrder(orderState)
+      setOrderDetails(initialValues)
     }
-
-    setOrderDetails(initialValues)
   }
 
   return (
@@ -127,27 +128,33 @@ const ListOrder: React.FC = () => {
         </Main>
         <Footer>
           <TotalOrder>Total: {formatPrice(totalOrderSum())}</TotalOrder>
-          <ClientName>
-            <ClientNameInput
-              value={orderDetails.clientName}
-              name="clientName"
-              onChange={updateFieldValues}
-              placeholder="Nome do cliente"
-            />
-            <IoIosPerson size={35} />
-          </ClientName>
-          <ReceivedMoney>
-            <ReceivedMoneyInput
-              value={orderDetails.receivedMoney}
-              name="receivedMoney"
-              placeholder="Insira o valor recebido"
-              onValueChange={currencyUpdate}
-              decimalSeparator="."
-              groupSeparator=","
-              prefix="R$ "
-            />
-            <GiReceiveMoney size={35} />
-          </ReceivedMoney>
+
+          <InputComponent
+            value={orderDetails.clientName}
+            name="clientName"
+            onChange={updateFieldValues}
+            placeholder="Nome do cliente"
+            icon={<IoIosPerson size={35} />}
+          />
+
+          <CurrencyInput
+            value={orderDetails.receivedMoney}
+            name="receivedMoney"
+            placeholder="Insira o valor recebido"
+            onValueChange={currencyUpdate}
+            decimalSeparator="."
+            groupSeparator=","
+            prefix="R$ "
+            icon={<GiReceiveMoney size={35} />}
+          />
+
+          <InputComponent
+            value={orderDetails.note}
+            name="note"
+            placeholder="Observação"
+            onChange={updateFieldValues}
+            icon={<GrNotes size={30} />}
+          />
           <Change>Troco: {calculateChange()}</Change>
 
           <FinishOrder onClick={finishOrder}>Finalizar pedido</FinishOrder>

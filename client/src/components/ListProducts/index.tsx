@@ -1,12 +1,10 @@
 import React from 'react'
-import { Product } from '../../services/Product'
 import { GoSearch } from 'react-icons/go'
 
 import {
   Container,
   Title,
   Menu,
-  SearchInput,
   SearchBox,
   Main,
   Products,
@@ -19,6 +17,7 @@ import {
 import { useOrders } from '../../hooks/useOrders'
 import { Order, OrderProducts } from '../../contexts/OrdersContext'
 import { formatPrice } from '../../utils/formatters'
+import { InputComponent } from '../Input'
 
 type Props = {
   data: Product[]
@@ -27,12 +26,10 @@ type Props = {
 }
 
 const ListProducts: React.FC<Props> = ({ data, searchText, searchProduct }) => {
-  const { order, orders, updateOrder } = useOrders()
+  const { order, updateOrder } = useOrders()
 
   const addProductToOrder = (product: Product) => {
     const orderState: Order = { ...order } as Order
-
-    orderState.id = orderState.id ? orderState.id : orders.length + 1
 
     const productAlreadyAdded = orderState.products
       ?.filter(productInserted => productInserted.id === product.id)
@@ -62,13 +59,14 @@ const ListProducts: React.FC<Props> = ({ data, searchText, searchProduct }) => {
       <Title>Cardapio</Title>
       <Menu>
         <SearchBox>
-          <SearchInput
+          <InputComponent
             placeholder="pesquisar produto"
             value={searchText}
             onChange={searchProduct}
+            icon={<GoSearch size={25} />}
           />
-          <GoSearch size={25} />
         </SearchBox>
+
         <Main>
           {data.slice(0, 17).map(product => (
             <Products

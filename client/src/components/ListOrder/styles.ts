@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import CurrencyInput from 'react-currency-input-field'
 
 export const Container = styled.div``
 
@@ -19,6 +18,7 @@ export const OrderDetails = styled.div`
   justify-content: flex-start;
   padding: 10px 10px;
 `
+
 export const Main = styled.main`
   width: 100%;
   height: 60%;
@@ -44,6 +44,7 @@ export const LeftContainer = styled.div`
 export const ProductName = styled.p`
   font-size: 18px;
 `
+
 export const RightContainer = styled.div`
   width: 40%;
   display: flex;
@@ -64,7 +65,7 @@ export const TotalProduct = styled.p`
 
 export const Footer = styled.footer`
   width: 100%;
-  height: 40%;
+  height: 45%;
   background: ${props => props.theme.colors.footer};
   display: flex;
   justify-content: flex-start;
@@ -72,50 +73,10 @@ export const Footer = styled.footer`
   flex-direction: column;
   padding: 10px;
 `
+
 export const TotalOrder = styled.p`
   font-size: 25px;
   font-weight: 700;
-`
-
-export const ClientName = styled.div`
-  background: #ffffff;
-  width: 90%;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid ${props => props.theme.colors.secondary};
-  border-radius: 20px;
-  padding: 5px 10px;
-  margin: 10px 0;
-`
-
-export const ClientNameInput = styled.input`
-  width: 95%;
-  height: 100%;
-  padding: 5px;
-  border: none;
-  background: transparent;
-`
-
-export const ReceivedMoney = styled.div`
-  background: #ffffff;
-  width: 90%;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid ${props => props.theme.colors.secondary};
-  border-radius: 20px;
-  padding: 5px 10px;
-`
-
-export const ReceivedMoneyInput = styled(CurrencyInput)`
-  width: 95%;
-  height: 100%;
-  padding: 5px;
-  border: none;
-  background: transparent;
 `
 
 export const Change = styled.p`
@@ -123,6 +84,7 @@ export const Change = styled.p`
   font-weight: 500;
   margin-top: 20px;
 `
+
 export const FinishOrder = styled.button`
   background: #ffffff;
   margin-top: 10px;

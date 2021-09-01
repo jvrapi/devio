@@ -15,7 +15,7 @@ export const OrdersBox = styled.div`
   background-color: ${props => props.theme.colors.primary};
   color: ${props => props.theme.colors.cardTextColor};
   width: 600px;
-  height: 480px;
+  height: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -89,7 +89,15 @@ export const OrderProductAmount = styled.span`
   font-weight: 500;
 `
 
-export const OrdersBoxFooter = styled.footer``
+export const OrdersBoxFooter = styled.footer`
+  width: 100%;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 5px 0%;
+`
 
 export const OrderButton = styled.button`
   width: 250px;
@@ -114,3 +122,16 @@ export const EmptyOrdersText = styled.span`
   font-weight: 700;
   font-size: 18px;
 `
+export const OrderNoteBox = styled.div`
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`
+export const OrderNoteText = styled.p`
+  font-size: 17px;
+  font-weight: 500;
+`
+export const OrderNoteTitle = styled.h2``

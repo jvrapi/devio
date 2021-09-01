@@ -12,6 +12,9 @@ import {
   ListOrdersContainer,
   OrderButton,
   OrderCode,
+  OrderNoteBox,
+  OrderNoteText,
+  OrderNoteTitle,
   OrderProductAmount,
   OrderProductName,
   OrderProducts,
@@ -67,7 +70,7 @@ const ListOrders: React.FC<Props> = ({ listAllOrdersReady }) => {
         <ListOrdersContainer>
           {data
             .filter(({ withdrawn }) => !withdrawn)
-            .map(({ id, clientName, products, ready }) => (
+            .map(({ id, clientName, products, ready, note }) => (
               <OrdersBox key={id}>
                 <OrdersBoxHeader>
                   <ClientName>{clientName}</ClientName>
@@ -91,6 +94,12 @@ const ListOrders: React.FC<Props> = ({ listAllOrdersReady }) => {
                   ))}
                 </OrdersBoxMain>
                 <OrdersBoxFooter>
+                  {note && (
+                    <OrderNoteBox>
+                      <OrderNoteTitle>Observações</OrderNoteTitle>
+                      <OrderNoteText>{note}</OrderNoteText>
+                    </OrderNoteBox>
+                  )}
                   <OrderButton onClick={() => onClickHandle(id)}>
                     {ready ? 'Retirar pedido' : 'Dar baixa no pedido'}
                   </OrderButton>

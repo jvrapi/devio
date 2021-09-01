@@ -1,6 +1,12 @@
-import React, { ReactNode, createContext, useState } from 'react'
+import React, {
+  ReactNode,
+  createContext,
+  useState,
+  useCallback,
+  useEffect
+} from 'react'
 import { toast } from 'react-toastify'
-
+import { socket } from '../services/Socket'
 export type OrderProducts = {
   amount: number
   price: number
@@ -13,6 +19,7 @@ export type Order = {
   ready: boolean
   withdrawn: boolean
   clientName: string
+  note: string
   products: OrderProducts[]
 }
 
@@ -35,14 +42,26 @@ export const OrdersContextProvider: React.FC<OrdersContextProviderProps> = ({
   const [orders, setOrders] = useState<Order[]>([])
   const [order, setOrder] = useState<Order>()
 
-  const updateOrders = (newOrders: Order[], message?: string) => {
-    setOrders(newOrders)
+  const updateOrders = useCallback((newOrders: Order[], message?: string) => {
+    socket.emit('orders.update', newOrders)
+    socket.on('orders.update', data => {
+      setOrders(data)
+    })
     !!message && toast.success(message)
-  }
+  }, [])
 
   const updateOrder = (newOrder: Order) => {
     setOrder(newOrder)
   }
+
+  useEffect(() => {
+    socket.on('orders.update', data => {
+      setOrders(data)
+    })
+    return () => {
+      socket.off('orders.update')
+    }
+  }, [orders])
 
   return (
     <OrdersContext.Provider
