@@ -60,7 +60,20 @@ const ListProducts: React.FC<Props> = ({ data, searchText, searchProduct }) => {
         id: Math.floor(Math.random() * 1000 + 100),
         ready: false,
         withdrawn: false,
-        payment: '',
+        payment: {
+          card: {
+            number: '',
+            expirationDate: '',
+            securityCode: '',
+            receivedMoney: ''
+          },
+          pix: {
+            receivedMoney: ''
+          },
+          money: {
+            receivedMoney: ''
+          }
+        },
         clientName: '',
         note: '',
         products: []

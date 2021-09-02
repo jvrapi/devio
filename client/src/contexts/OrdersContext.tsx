@@ -1,6 +1,22 @@
 import React, { ReactNode, createContext, useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { socket } from '../services/Socket'
+
+type Payment = {
+  card?: {
+    number: string
+    expirationDate: string
+    securityCode: string
+    receivedMoney: string
+  }
+  pix?: {
+    receivedMoney: string
+  }
+  money?: {
+    receivedMoney: string
+  }
+}
+
 export type OrderProducts = {
   amount: number
   price: number
@@ -14,7 +30,7 @@ export type Order = {
   withdrawn: boolean
   clientName: string
   note: string
-  payment: string
+  payment: Payment
   products: OrderProducts[]
 }
 

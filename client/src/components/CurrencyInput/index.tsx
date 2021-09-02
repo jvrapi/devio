@@ -9,7 +9,7 @@ type Props = CurrencyInputProps & {
 const CurrencyInput: React.FC<Props> = ({ icon, ...props }) => {
   return (
     <Container>
-      <Input {...props} />
+      <Input decimalSeparator="." groupSeparator="," prefix="R$ " {...props} />
       {icon}
     </Container>
   )

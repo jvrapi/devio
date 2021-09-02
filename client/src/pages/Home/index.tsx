@@ -35,7 +35,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     getProducts()
     return () => {
-      socket.off('products.get', getProducts)
+      socket.off('products.get')
     }
   }, [])
 

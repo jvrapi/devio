@@ -17,11 +17,9 @@ export const GlobalStyles = createGlobalStyle`
     outline: none !important;
   }
   button{
-    border: 2px solid ${props => props.theme.colors.secondary};
+
     cursor: pointer;
     transition: 0.2s;
-    :hover {
-      background: #ccc;
-    }
+
   }
 `

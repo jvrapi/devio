@@ -47,6 +47,7 @@ const ListOrders: React.FC<Props> = ({ listAllOrdersReady }) => {
       setData(newOrders)
     }
   }, [orders])
+
   return (
     <Container>
       {data.length > 0 && (
