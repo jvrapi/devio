@@ -33,10 +33,19 @@ type Props = {
 const ListOrders: React.FC<Props> = ({ listAllOrdersReady }) => {
   const { orders, orderReady, withdrawOrder } = useOrders()
   const [data, setData] = useState<Order[]>([])
+  const [orderWithdrawn, setOrderWithdrawn] = useState(false)
 
   const onClickHandle = (id: number) => {
     listAllOrdersReady ? withdrawOrder(id) : orderReady(id)
   }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setOrderWithdrawn(!orderWithdrawn)
+    }, 2000)
+
+    return () => clearInterval(interval)
+  }, [orderWithdrawn])
 
   useEffect(() => {
     if (listAllOrdersReady) {
@@ -57,9 +66,13 @@ const ListOrders: React.FC<Props> = ({ listAllOrdersReady }) => {
             .map(({ id, clientName, products, ready, note }) => (
               <OrdersBox key={id}>
                 <OrdersBoxHeader>
-                  <ClientName>{clientName}</ClientName>
+                  <ClientName orderWithdrawn={ready && orderWithdrawn}>
+                    {clientName}
+                  </ClientName>
                   &nbsp;
-                  <OrderCode>#{id}</OrderCode>
+                  <OrderCode orderWithdrawn={ready && orderWithdrawn}>
+                    #{id}
+                  </OrderCode>
                 </OrdersBoxHeader>
 
                 <OrdersBoxMain>

@@ -1,5 +1,9 @@
 import styled from 'styled-components'
 
+type NotifyProps = {
+  orderWithdrawn: boolean
+}
+
 export const Container = styled.div``
 
 export const ListOrdersContainer = styled.div`
@@ -33,14 +37,25 @@ export const OrdersBoxHeader = styled.header`
   align-items: center;
 `
 
-export const ClientName = styled.h1`
+export const ClientName = styled.h1<NotifyProps>`
   font-size: 25px;
   font-weight: 700;
+  ${({ orderWithdrawn }) =>
+    orderWithdrawn &&
+    `
+    color: #22bb33;
+  `}
 `
 
-export const OrderCode = styled.h2`
+export const OrderCode = styled.h2<NotifyProps>`
   font-size: 25px;
   font-weight: 500;
+
+  ${({ orderWithdrawn }) =>
+    orderWithdrawn &&
+    `
+    color: #22bb33;
+  `}
 `
 
 export const OrdersBoxMain = styled.main`
@@ -104,6 +119,9 @@ export const OrderButton = styled.button`
   height: 50px;
   margin-top: 20px;
   border-radius: 30px;
+  :hover {
+    background-color: #ccc;
+  }
 `
 
 export const EmptyOrders = styled.div`
