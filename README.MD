@@ -1,9 +1,9 @@
 <div align="center" >
 <img src="https://devio.com.br/_next/image?url=%2Fimages%2Flogo%2Flogo.webp&w=256&q=75" width="150" />
 	<p >
-		<a href="#requisitos">Requisitos</a> • 
-		<a href="#tecnologias">Tecnologias</a> • 
-		<a href="#como-usar">Como usar</a> 
+		<a href="#-requisitos">Requisitos</a> • 
+		<a href="#-tecnologias">Tecnologias</a> • 
+		<a href="-#-como-usar">Como usar</a> 
 	</p>
 	
 </div>
@@ -15,7 +15,7 @@
 
 ### Obrigatórios
 
-<br>
+
 
 - [x] Backend para cadastro de produtos
 
@@ -46,7 +46,7 @@ pedido.
 
 ### Opcionais
 
-<br>
+
 
 - [x] Os pedidos devem aparecer para a cozinha em tempo real.
 
@@ -62,11 +62,11 @@ apitando para ser feito a retirada.
 
 ## 🚀 Tecnologias
 
-<br>
+
 
 ### Frontend
 
-<br>
+
 
 - [ReactJS](https://pt-br.reactjs.org/docs/create-a-new-react-app.html)
 
@@ -118,7 +118,7 @@ Também será necessário um banco Postgres para conseguir utilizar o servidor. 
 
 Renomeie o arquivo `.env.example` para `.env` e adicione as credenciais do banco de dados no arquivo. 
 
-
+<hr>
 <div align="center">
 
 
