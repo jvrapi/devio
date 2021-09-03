@@ -3,7 +3,7 @@
 	<p >
 		<a href="#-requisitos">Requisitos</a> • 
 		<a href="#-tecnologias">Tecnologias</a> • 
-		<a href="information_source-como-usar">Como usar</a> 
+		<a href="#information_source-como-usar">Como usar</a> 
 	</p>
 	
 </div>
@@ -109,7 +109,7 @@ Em ambos os projetos foi utilizado o [TypeScript](https://www.typescriptlang.org
 
 <br>
 
-## ℹ️ Como usar
+## :information_source: Como usar
 ara clonar e executar este aplicativo, você precisará do [Git](https://git-scm.com), [Node.js v14.16](nodejs.org/) ou superior. Também foi utilizado o [Yarn v1.22.5](https://yarnpkg.com) no projeto. 
 
 Para clonar e rodar o projeto, utilize no seu terminal o comando `git clone https://github.com/jvrapi/devio.git`. Depois, nas pastas `client` e `server`, você deve utilizar o comando `yarn install ou npm install`. 
