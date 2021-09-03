@@ -116,7 +116,7 @@ Para clonar e rodar o projeto, utilize no seu terminal o comando `git clone http
 
 Também será necessário um banco Postgres para conseguir utilizar o servidor. Caso tenha o [docker compose](https://docs.docker.com/compose/) em sua máquina, a pasta `server` possui um arquivo do docker compose para a criação de um banco de dados Postgres.
 
-Renomeie o arquivo `.env.example` para `.env` e adicione as credenciais do banco de dados no arquivo. 
+Dentro da pasta `server`, renomeie o arquivo `.env.example` para `.env` e adicione as credenciais do banco de dados no arquivo. 
 
 <hr>
 <div align="center">
